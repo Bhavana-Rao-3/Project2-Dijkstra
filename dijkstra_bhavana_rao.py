@@ -1,4 +1,4 @@
-
+#Import libraries
 import pygame
 import math
 from queue import PriorityQueue
@@ -47,7 +47,7 @@ hexagon_points = [
     for angle in angles
 ]
 
-
+# Function to check if a point lies inside a hexagon
 def point_inside_hexagon(x, y, hexagon_points):
     """
     Check if a point (x, y) lies inside a hexagon defined by its vertices.
@@ -67,7 +67,7 @@ def point_inside_hexagon(x, y, hexagon_points):
         p1x, p1y = p2x, p2y
     return inside
 
-
+# Function to get valid input from the user
 def get_valid_input(prompt):
     while True:
         try:
@@ -187,6 +187,9 @@ for x in range(width):
 
 
 def dijkstra(graph, start_index, end_index):
+    """
+    Perform Dijkstra's algorithm to find the shortest path from start to end in the graph.
+    """
     pq = PriorityQueue()
     pq.put((0, start_index, []))  # Cost from start to node, current node, path of nodes
     visited = set()
