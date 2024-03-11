@@ -204,7 +204,7 @@ def dijkstra(graph, start_index, end_index):
         if current_node != start_point:  # Avoid redrawing the start node
             pygame.draw.circle(screen, blue, current_node, 2)
             pygame.display.update()
-
+        
         if current_node == end_point:  # If end node is reached
             final_path = []
             while current_node_index is not None:
@@ -212,6 +212,15 @@ def dijkstra(graph, start_index, end_index):
                 current_node_index = parents[current_node_index]
             final_path.reverse()
             return final_path  # Return reversed path from start to end
+
+        if current_node_index == end_index:  # If end node is reached
+            cost = dist  # Store the cost when reaching the end node
+            final_path = []
+            while current_node_index is not None:
+                final_path.append((current_node_index % width, current_node_index // width))
+                current_node_index = parents[current_node_index]
+            final_path.reverse()
+            return final_path, cost  # Return reversed path from start to end and the cost
 
         for neighbor_index in graph[current_node_index]:
             if neighbor_index not in visited:
@@ -223,7 +232,7 @@ def dijkstra(graph, start_index, end_index):
                 pq.put((new_cost, neighbor_index, path + [neighbor_index]))
                 parents[neighbor_index] = current_node_index  # To reconstruct the path later
 
-    return None  # If no path is found
+    return None, cost  # If no path is found
 
 
 
@@ -278,6 +287,8 @@ while running:
             for x, y in path:
                 pygame.draw.circle(screen, black, (x, y), 2)
                 pygame.display.update()  # Update the display with the new path
+            print("Path found from", start_point, "to", end_point)
+            print("Cost:", path_cost)  # Print the cost
         else:
             print("No path found from", start_point, "to", end_point)
         path_drawn = True
