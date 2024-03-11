@@ -16,7 +16,7 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 green = (0, 255, 0)  # For the obstacle space
 red = (255, 0, 0)  # For the clearance
-blue = (0, 0, 255)
+blue = (230, 230, 250)
 
 # Function to draw a regular hexagon
 # Hexagon parameters
